@@ -2,6 +2,8 @@
 - name: Deploy Kubernetes manifests to the K3s node
   hosts: ec2
   become: true
+  vars:
+    dockerhub_user: pranavv712
   tasks:
     - name: Create manifest directory
       file:
@@ -14,6 +16,12 @@
         src: "../k8s/{{ item }}"
         dest: "/home/ubuntu/k8s/{{ item }}"
       loop: [deployment.yaml, service.yaml]
+
+    - name: Set the Docker Hub image in the manifest
+      replace:
+        path: /home/ubuntu/k8s/deployment.yaml
+        regexp: 'DOCKERHUB_USER'
+        replace: "{{ dockerhub_user }}"
 
     - name: Apply manifests with kubectl
       command: k3s kubectl apply -f /home/ubuntu/k8s/

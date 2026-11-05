@@ -7,7 +7,7 @@ import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 
 public class App {
-    static final String MESSAGE = "Hello, CI/CD Pipeline!";
+    static final String MESSAGE = "Hello, from gcp";
 
     public static String buildPage(String message) {
         return "<!DOCTYPE html><html><head><title>CI/CD Demo</title></head>"

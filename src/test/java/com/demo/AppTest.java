@@ -8,7 +8,7 @@ class AppTest {
         assertTrue(App.buildPage("Hello").contains("<h1>Hello</h1>"));
     }
     @Test void defaultMessageIsSet() {
-        assertEquals("Hello, CI/CD Pipeline!", App.MESSAGE);
+        assertEquals("Hello, from gcp", App.MESSAGE);
     }
     @Test void healthReportsUp() {
         assertEquals("{\"status\":\"UP\"}", App.health());
