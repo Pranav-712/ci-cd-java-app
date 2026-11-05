@@ -1,0 +1,8 @@
+target/
+.git/
+.github/
+k8s/
+ansible/
+*.md
+*.pem
+.env

@@ -1,0 +1,25 @@
+---
+- name: Deploy Kubernetes manifests to the K3s node
+  hosts: ec2
+  become: true
+  tasks:
+    - name: Create manifest directory
+      file:
+        path: /home/ubuntu/k8s
+        state: directory
+        owner: ubuntu
+
+    - name: Copy manifests
+      copy:
+        src: "../k8s/{{ item }}"
+        dest: "/home/ubuntu/k8s/{{ item }}"
+      loop: [deployment.yaml, service.yaml]
+
+    - name: Apply manifests with kubectl
+      command: k3s kubectl apply -f /home/ubuntu/k8s/
+      register: apply_out
+      changed_when: "'configured' in apply_out.stdout or 'created' in apply_out.stdout"
+
+    - name: Show apply result
+      debug:
+        var: apply_out.stdout_lines
