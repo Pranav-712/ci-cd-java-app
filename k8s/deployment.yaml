@@ -16,9 +16,9 @@ spec:
         - name: java-app
           image: DOCKERHUB_USER/ci-cd-java-app:latest
           ports:
-            - containerPort: 8080
+            - containerPort: 9090
           readinessProbe:
             httpGet:
               path: /health
-              port: 8080
+              port: 9090
             initialDelaySeconds: 5

@@ -3,10 +3,10 @@ WORKDIR /app
 COPY pom.xml .
 RUN mvn -B dependency:go-offline
 COPY src ./src
-RUN mvn -B clean package -DskipTests
+RUN mvn -B clean package
 
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 COPY --from=builder /app/target/ci-cd-java-app-1.0.0.jar app.jar
-EXPOSE 8080
+EXPOSE 9090
 ENTRYPOINT ["java","-jar","app.jar"]
